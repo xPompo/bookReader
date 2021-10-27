@@ -34,6 +34,7 @@ export default function ReminderRead() {
 }
 const styles = StyleSheet.create({
   container: {
+    marginBottom: 20,
     width: "90%",
     borderRadius: 10,
     backgroundColor: Colors.W,
