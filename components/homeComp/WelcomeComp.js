@@ -7,6 +7,7 @@ export default function WelcomeComp() {
     <View style={styles.container}>
       <Text style={styles.tittle}>Hello,TEXT</Text>
       <Text style={styles.subTittle}>Which books suits your current mood?</Text>
+
       <Image
         source={{
           uri: "https://img.freepik.com/free-vector/set-hand-drawn-book-doodle-elements_253081-8.jpg?size=626&ext=jpg",
@@ -21,13 +22,12 @@ export default function WelcomeComp() {
 const styles = StyleSheet.create({
   container: {
     position: "relative",
-    height: 250,
+    // height: 250,
     width: "95%",
     paddingTop: 40,
     justifyContent: "flex-start",
     alignItems: "center",
     borderRadius: 10,
-    overflow: "hidden",
   },
   BGImage: {
     width: "100%",
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     zIndex: -2,
     position: "absolute",
   },
+
   tittle: {
     color: Colors.W,
     fontWeight: "bold",
@@ -57,5 +58,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     letterSpacing: 1,
     lineHeight: 20,
+    marginBottom: 30,
   },
 });
