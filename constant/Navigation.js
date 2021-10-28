@@ -37,6 +37,7 @@ export default function Navigation() {
       <Tab.Navigator
         initialRouteName="navHome"
         screenOptions={{
+          tabBarStyle: styles.tabBarStyle,
           tabBarActiveTintColor: Colors.orange,
           tabBarInactiveTintColor: Colors.grayDark,
           headerShown: false,
@@ -131,4 +132,11 @@ export default function Navigation() {
 
 const styles = StyleSheet.create({
   tabIcon: { justifyContent: "center", alignItems: "center" },
+  tabBarStyle: {
+    height: 70,
+    paddingHorizontal: 30,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    backgroundColor: Colors.grayWhite,
+  },
 });

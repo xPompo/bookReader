@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   bookImageContainer: {
     width: "100%",
-    height: "60%",
+    height: "75%",
   },
   bookImage: {
     width: "100%",
