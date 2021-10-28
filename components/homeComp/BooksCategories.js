@@ -24,6 +24,7 @@ export default function BooksCategories() {
           style={{
             ...styles.CategoryItemContainer,
             backgroundColor: playingindex === index ? Colors.BG : Colors.W,
+            elevation: playingindex === index ? 15 : 1,
           }}
         >
           <View style={styles.textContainer}>
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     width: "90%",
     justifyContent: "center",
     alignItems: "center",
-    height: 100,
+    paddingVertical: 20,
   },
   textContainer: {
     flexDirection: "row",
@@ -71,10 +72,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderColor: Colors.gray,
-    borderWidth: 1.5,
+    borderWidth: 1,
     borderRadius: 5,
     marginHorizontal: 10,
-    elevation: 4,
     shadowColor: Colors.grayDark,
   },
   icon: {
