@@ -5,11 +5,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SearchBook from "../screens/SearchBook";
 import BookDetails from "../screens/BookDetails";
-import { AntDesign, Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons, Entypo, FontAwesome } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import BookMark from "../screens/BookMark";
 import "react-native-gesture-handler";
+import { Colors } from "./Colors";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -18,7 +19,10 @@ export default function Navigation() {
     return (
       <Stack.Navigator
         initialRouteName="home"
+        activeColor="red"
         screenOptions={{
+          tabBarActiveTintColor: Colors.orange,
+          tabBarInactiveTintColor: Colors.grayDark,
           headerShown: false,
           tabBarShowLabel: false,
         }}
@@ -33,6 +37,8 @@ export default function Navigation() {
       <Tab.Navigator
         initialRouteName="navHome"
         screenOptions={{
+          tabBarActiveTintColor: Colors.orange,
+          tabBarInactiveTintColor: Colors.grayDark,
           headerShown: false,
           tabBarShowLabel: false,
         }}
@@ -42,9 +48,15 @@ export default function Navigation() {
           component={navHome}
           options={{
             tabBarIcon: ({ color }) => {
+              console.log(color + " hola");
               return (
                 <View style={styles.tabIcon}>
-                  <AntDesign name="home" size={22} color={color} />
+                  {color === Colors.orange && (
+                    <Entypo name="home" size={22} color={color} />
+                  )}
+                  {color === Colors.grayDark && (
+                    <AntDesign name="home" size={22} color={color} />
+                  )}
                   <Text style={{ fontSize: 10, color: color }}>Home</Text>
                 </View>
               );
@@ -60,7 +72,12 @@ export default function Navigation() {
             tabBarIcon: ({ color }) => {
               return (
                 <View style={styles.tabIcon}>
-                  <AntDesign name="search1" size={22} color={color} />
+                  {color === Colors.grayDark && (
+                    <AntDesign name="search1" size={22} color={color} />
+                  )}
+                  {color === Colors.orange && (
+                    <FontAwesome name="search" size={22} color={color} />
+                  )}
                   <Text style={{ fontSize: 10, color: color }}>Search</Text>
                 </View>
               );
@@ -75,7 +92,12 @@ export default function Navigation() {
             tabBarIcon: ({ color }) => {
               return (
                 <View style={styles.tabIcon}>
-                  <AntDesign name="user" size={22} color={color} />
+                  {color === Colors.grayDark && (
+                    <AntDesign name="user" size={22} color={color} />
+                  )}
+                  {color === Colors.orange && (
+                    <FontAwesome name="user" size={22} color={color} />
+                  )}
                   <Text style={{ fontSize: 10, color: color }}>Profile</Text>
                 </View>
               );
@@ -90,7 +112,12 @@ export default function Navigation() {
             tabBarIcon: ({ color }) => {
               return (
                 <View style={styles.tabIcon}>
-                  <Ionicons name="bookmark-outline" size={22} color={color} />
+                  {color === Colors.grayDark && (
+                    <Ionicons name="bookmark-outline" size={22} color={color} />
+                  )}
+                  {color === Colors.orange && (
+                    <Ionicons name="bookmark" size={22} color={color} />
+                  )}
                   <Text style={{ fontSize: 10, color: color }}>Bookmark</Text>
                 </View>
               );

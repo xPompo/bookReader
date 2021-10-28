@@ -8,6 +8,7 @@ import {
   Dimensions,
   Pressable,
 } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import { Colors } from "../../constant/Colors";
 const { width } = Dimensions.get("window");
 const DUMMY_DATA = [
@@ -43,6 +44,11 @@ export default function BooksList({ navigation }) {
   const render = ({ item, index }) => {
     return (
       <View style={styles.bookItemContainer}>
+        <View style={styles.rateContainer}>
+          <AntDesign name="star" size={12} color={Colors.orange} />
+          <Text style={styles.rateTextMain}>{item.rating}</Text>
+          <Text style={styles.rateTextSec}> /5</Text>
+        </View>
         <View style={styles.bookImageContainer}>
           <Image source={{ uri: item.image }} style={styles.bookImage} />
         </View>
@@ -85,12 +91,37 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
   bookItemContainer: {
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     marginHorizontal: 10,
     width: width * 0.3,
     height: 280,
+  },
+  rateContainer: {
+    position: "absolute",
+    zIndex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    top: 10,
+    left: 10,
+    backgroundColor: Colors.W,
+    borderRadius: 20,
+    width: 65,
+    height: 25,
+  },
+  rateTextMain: {
+    fontSize: 14,
+    color: Colors.B,
+    fontWeight: "bold",
+    letterSpacing: 0.5,
+  },
+  rateTextSec: {
+    fontSize: 10,
+    color: Colors.grayDark,
+    letterSpacing: 0.5,
   },
   bookImageContainer: {
     width: "100%",
