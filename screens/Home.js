@@ -3,22 +3,24 @@ import {
   View,
   StyleSheet,
   Platform,
-  StatusBar,
+  StatusBar as StatusBarNative,
   ScrollView,
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import BooksCategories from "../components/homeComp/BooksCategories";
 import ReminderRead from "../components/homeComp/ReminderRead";
 import WelcomeComp from "../components/homeComp/WelcomeComp";
 import BooksList from "../components/homeComp/BooksList";
 
-export default function Home() {
+export default function Home({ navigation }) {
   return (
     <ScrollView>
       <View style={styles.container}>
         <WelcomeComp />
         <ReminderRead />
         <BooksCategories />
-        <BooksList />
+        <BooksList navigation={navigation} />
+        <StatusBar style="auto" />
       </View>
     </ScrollView>
   );
@@ -30,6 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     backgroundColor: "white",
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    paddingTop: Platform.OS === "android" ? StatusBarNative.currentHeight : 0,
   },
 });
