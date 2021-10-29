@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -13,13 +13,32 @@ import WelcomeComp from "../components/homeComp/WelcomeComp";
 import BooksList from "../components/homeComp/BooksList";
 
 export default function Home({ navigation }) {
+  const API_LEY = "xSmRRimyfL7qUfuZXl0pro3MM3macGUW";
+  const [bookList, setBookList] = useState([]);
+  const [bookCategory, setBookCategory] = useState("hardcover-fiction");
+  useEffect(() => {
+    getBooksApiData();
+  }, [bookCategory]);
+
+  const getBooksApiData = () => {
+    try {
+      fetch(
+        `https://api.nytimes.com/svc/books/v3/lists/current/${bookCategory}.json?api-key=${API_LEY}`
+      )
+        .then((response) => response.json())
+        .then((data) => setBookList(data.results.books));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <WelcomeComp />
         <ReminderRead />
-        <BooksCategories />
-        <BooksList navigation={navigation} />
+        <BooksCategories setBookCategory={setBookCategory} />
+        <BooksList navigation={navigation} bookList={bookList} />
         <StatusBar style="auto" />
       </View>
     </ScrollView>

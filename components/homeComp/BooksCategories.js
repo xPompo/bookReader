@@ -2,19 +2,38 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import { Colors } from "../../constant/Colors";
 
-export default function BooksCategories() {
+export default function BooksCategories({ setBookCategory }) {
   const DUMMY_TEXT = [
-    { id: "1", name: "Fancy", icon: "*" },
-    { id: "2", name: "action", icon: "*" },
-    { id: "3", name: "drama", icon: "*" },
-    { id: "4", name: "horror", icon: "*" },
-    { id: "5", name: "cat1", icon: "*" },
-    { id: "6", name: "cat2", icon: "*" },
+    {
+      id: "1",
+      name: "fiction",
+      list_name_encoded: "hardcover-fiction",
+      icon: "*",
+    },
+    {
+      id: "2",
+      name: "non-fiction",
+      list_name_encoded: "paperback-nonfiction",
+      icon: "*",
+    },
+    {
+      id: "3",
+      name: "fiction",
+      list_name_encoded: "combined-print-and-e-book-fiction",
+      icon: "*",
+    },
+    {
+      id: "4",
+      name: "non-fiction",
+      list_name_encoded: "paperback-nonfiction",
+      icon: "*",
+    },
   ];
 
   const [playingindex, setplayindex] = useState(0);
   const activeColorHandler = (idx) => {
     setplayindex(idx);
+    setBookCategory(DUMMY_TEXT[idx].list_name_encoded);
   };
 
   const render = ({ item, index }) => {

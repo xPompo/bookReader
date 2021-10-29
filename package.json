@@ -19,7 +19,8 @@
     "react-native-screens": "~3.8.0",
     "react-native-web": "0.17.1",
     "react-native-gesture-handler": "~1.10.2",
-    "@react-native-masked-view/masked-view": "0.2.5"
+    "@react-native-masked-view/masked-view": "0.2.5",
+    "expo-linear-gradient": "~10.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

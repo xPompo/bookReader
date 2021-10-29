@@ -19,15 +19,13 @@ export default function Navigation() {
     return (
       <Stack.Navigator
         initialRouteName="home"
-        activeColor="red"
         screenOptions={{
           tabBarActiveTintColor: Colors.orange,
           tabBarInactiveTintColor: Colors.grayDark,
           headerShown: false,
-          tabBarShowLabel: false,
         }}
       >
-        <Tab.Screen name="home" component={Home} />
+        <Stack.Screen name="home" component={Home} />
         <Tab.Screen name="details" component={BookDetails} />
       </Stack.Navigator>
     );
@@ -49,7 +47,6 @@ export default function Navigation() {
           component={navHome}
           options={{
             tabBarIcon: ({ color }) => {
-              console.log(color + " hola");
               return (
                 <View style={styles.tabIcon}>
                   {color === Colors.orange && (

@@ -11,77 +11,54 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 import { Colors } from "../../constant/Colors";
 const { width } = Dimensions.get("window");
-const DUMMY_DATA = [
-  {
-    image:
-      "https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/7/30/1406719196162/b57b6007-afb1-4e3c-8263-b29f6534aee8-1360x2040.jpeg?width=700&quality=85&auto=format&fit=max&s=ac278c37a7564a3950831f264b08e215",
-    title: "the Tittle of Book",
-    auther: "auther Name",
-    price: "15",
-    rating: "4.5",
-    key: "1",
-  },
-  {
-    image:
-      "https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/7/30/1406719196162/b57b6007-afb1-4e3c-8263-b29f6534aee8-1360x2040.jpeg?width=700&quality=85&auto=format&fit=max&s=ac278c37a7564a3950831f264b08e215",
-    title: "the Tittle of Book",
-    auther: "auther Name",
-    price: "15",
-    rating: "4.5",
-    key: "2",
-  },
-  {
-    image:
-      "https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2014/7/30/1406719196162/b57b6007-afb1-4e3c-8263-b29f6534aee8-1360x2040.jpeg?width=700&quality=85&auto=format&fit=max&s=ac278c37a7564a3950831f264b08e215",
-    title: "Tittle",
-    auther: "auther Name",
-    price: "15",
-    rating: "4.5",
-    key: "3",
-  },
-];
-export default function BooksList({ navigation }) {
+
+export default function BooksList({ navigation, bookList }) {
+  const getBookDetails = (bookDetails) => {
+    navigation.navigate("navHome", {
+      screen: "details",
+      params: { bookDetails },
+    });
+  };
+
   const render = ({ item, index }) => {
     return (
-      <View style={styles.bookItemContainer}>
-        <View style={styles.rateContainer}>
-          <AntDesign name="star" size={12} color={Colors.orange} />
-          <Text style={styles.rateTextMain}>{item.rating}</Text>
-          <Text style={styles.rateTextSec}> /5</Text>
+      <Pressable onPress={() => getBookDetails(item)}>
+        <View style={styles.bookItemContainer}>
+          <View style={styles.rateContainer}>
+            <AntDesign name="star" size={12} color={Colors.orange} />
+            <Text style={styles.rateTextMain}>4.5</Text>
+            <Text style={styles.rateTextSec}> /5</Text>
+          </View>
+          <View style={styles.bookImageContainer}>
+            <Image source={{ uri: item.book_image }} style={styles.bookImage} />
+          </View>
+          <Text style={styles.bookTitle}>
+            {item.title.length > 12
+              ? item.title.slice(0, 12) + "..."
+              : item.title}
+          </Text>
+          <Text style={styles.bookAuther}>
+            {" "}
+            {item.author.length > 12
+              ? item.author.slice(0, 12) + "..."
+              : item.author}
+          </Text>
         </View>
-        <View style={styles.bookImageContainer}>
-          <Image source={{ uri: item.image }} style={styles.bookImage} />
-        </View>
-        <Text style={styles.bookTitle}>
-          {item.title.length > 12
-            ? item.title.slice(0, 12) + "..."
-            : item.title}
-        </Text>
-        <Text style={styles.bookAuther}>
-          {" "}
-          {item.auther.length > 12
-            ? item.auther.slice(0, 12) + "..."
-            : item.auther}
-        </Text>
-      </View>
+      </Pressable>
     );
-  };
-  const getBookDetails = () => {
-    navigation.navigate("navHome", { screen: "details" });
   };
 
   return (
-    <Pressable onPress={getBookDetails}>
-      <View style={styles.container}>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={DUMMY_DATA}
-          keyExtractor={(item) => item.key}
-          renderItem={render}
-        />
-      </View>
-    </Pressable>
+    <View style={styles.container}>
+      <FlatList
+        bounces={true}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        data={bookList}
+        keyExtractor={(item) => item.title}
+        renderItem={render}
+      />
+    </View>
   );
 }
 
@@ -135,10 +112,11 @@ const styles = StyleSheet.create({
   },
   bookTitle: {
     color: Colors.BG,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     marginTop: 10,
     textAlign: "center",
+    textTransform: "capitalize",
   },
   bookAuther: {
     fontSize: 14,
