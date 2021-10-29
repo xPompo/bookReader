@@ -34,7 +34,6 @@ export default function Banner({ bookDetails, getDetails }) {
           />
         </View>
         <Text style={styles.bookAuthor}>Author: {bookDetails.author}</Text>
-        {/* <Text style={styles.bookDescrition}>{bookDetails.description}</Text> */}
       </View>
     </View>
   );
@@ -70,9 +69,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bookTitle: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "bold",
-    color: Colors.B,
+    color: Colors.BG,
     textTransform: "capitalize",
     marginVertical: 20,
   },
@@ -99,14 +98,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 30,
     letterSpacing: 1,
-  },
-  bookDescrition: {
-    width: width * 0.8,
-    fontSize: 14,
-    color: Colors.B,
-    marginBottom: 20,
-    textAlign: "center",
-    lineHeight: 20,
-    letterSpacing: 0.5,
   },
 });
