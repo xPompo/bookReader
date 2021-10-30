@@ -2,12 +2,25 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { Colors } from "../../constant/Colors";
 import { Ionicons } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 
-export default function Description({ bookDetails }) {
+export default function Description({ bookDetails, navigation }) {
   const [bookmarkActive, setBookmarkActive] = useState(false);
+  const dispatch = useDispatch();
 
   const bookmarkHandler = () => {
     setBookmarkActive((prev) => !prev);
+    if (!bookmarkActive) {
+      dispatch({
+        type: "SAVE_IN_BOOKMARK",
+        payload: { favouritBook: bookDetails },
+      });
+    } else {
+      dispatch({
+        type: "REMOVE_FROM_BOOKMARK",
+        payload: { favouritBook: bookDetails },
+      });
+    }
   };
 
   return (
@@ -18,11 +31,18 @@ export default function Description({ bookDetails }) {
       </View>
       <View style={styles.btnsContainer}>
         <Pressable onPress={bookmarkHandler}>
-          <View style={styles.btnBookMark}>
+          <View
+            style={{
+              ...styles.btnBookMark,
+              backgroundColor: bookmarkActive
+                ? Colors.orange
+                : Colors.grayWhite,
+            }}
+          >
             <Ionicons
               name={bookmarkActive ? "bookmark" : "bookmark-outline"}
               size={20}
-              color={Colors.orange}
+              color={bookmarkActive ? Colors.grayWhite : Colors.orange}
             />
           </View>
         </Pressable>
@@ -68,7 +88,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   btnBookMark: {
-    backgroundColor: Colors.grayWhite,
     borderRadius: 5,
     width: 60,
     height: 60,

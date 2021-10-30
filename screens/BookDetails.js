@@ -5,34 +5,15 @@ import Banner from "../components/detailsComp/Banner";
 import RatingBar from "../components/detailsComp/RatingBar";
 import Description from "../components/detailsComp/Description";
 import { ScrollView } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
 
 export default function BookDetails(props) {
-  const API_LEY = "xSmRRimyfL7qUfuZXl0pro3MM3macGUW";
-  const bookDetails = props.route.params.bookDetails;
-  const authorId = bookDetails.author.replace(" ", "+");
-  const [getDetails, setGetDetails] = useState([]);
-
-  console.log(authorId);
-  // useEffect(() => {
-  //   getAuthorDetail();
-  // }, [authorId]);
-
-  // const getAuthorDetail = () => {
-  //   try {
-  //     fetch(
-  //       `https://api.nytimes.com/svc/books/v3/reviews.json?author=${authorId}&api-key=${API_LEY}`
-  //     )
-  //       .then((response) => response.json())
-  //       .then((data) => setGetDetails(data.results));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
+  const book = useSelector((state) => state.reducer.bookItemDetail);
+  const [bookDetails, setbookDetails] = useState(book);
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Banner bookDetails={bookDetails} getDetails={getDetails} />
+        <Banner bookDetails={bookDetails} />
         <RatingBar bookDetails={bookDetails} />
         <Description bookDetails={bookDetails} />
         <StatusBar style="auto" />

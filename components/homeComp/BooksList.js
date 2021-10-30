@@ -10,13 +10,15 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Colors } from "../../constant/Colors";
+import { useDispatch } from "react-redux";
 const { width } = Dimensions.get("window");
 
 export default function BooksList({ navigation, bookList }) {
+  const dispatch = useDispatch();
   const getBookDetails = (bookDetails) => {
+    dispatch({ type: "BOOK_DETAILS", bookDetails });
     navigation.navigate("navHome", {
       screen: "details",
-      params: { bookDetails },
     });
   };
 
@@ -26,7 +28,7 @@ export default function BooksList({ navigation, bookList }) {
         <View style={styles.bookItemContainer}>
           <View style={styles.rateContainer}>
             <AntDesign name="star" size={12} color={Colors.orange} />
-            <Text style={styles.rateTextMain}>4.5</Text>
+            <Text style={styles.rateTextMain}>4.8</Text>
             <Text style={styles.rateTextSec}> /5</Text>
           </View>
           <View style={styles.bookImageContainer}>
