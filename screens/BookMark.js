@@ -15,17 +15,17 @@ export default function BookMark() {
   );
 
   const render = ({ item, index }) => {
-    return <FavouritItem item={item} index={index} />;
+    return <FavouritItem item={item} />;
   };
 
   return (
     <View style={styles.container}>
       <FlatList
+        contentContainerStyle={styles.contentContainer}
         data={arrayFavouritBooks}
         renderItem={render}
         keyExtractor={(item, index) => index.toString()}
       />
-
       <StatusBar style="auto" />
     </View>
   );
@@ -34,9 +34,14 @@ export default function BookMark() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
+    width: "100%",
+    justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
     paddingTop: Platform.OS === "android" ? StatusBarNative.currentHeight : 0,
+  },
+  contentContainer: {
+    width: "100%",
+    height: "100%",
   },
 });
