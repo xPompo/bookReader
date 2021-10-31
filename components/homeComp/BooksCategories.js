@@ -17,12 +17,22 @@ export default function BooksCategories({ setBookCategory }) {
     {
       id: "3",
       name: "Drama",
-      list_name_encoded: "combined-print-and-e-book-fiction",
+      list_name_encoded: "hardcover-nonfiction",
     },
     {
       id: "4",
-      name: "Social",
-      list_name_encoded: "paperback-nonfiction",
+      name: "Mass Market",
+      list_name_encoded: "mass-market-paperback",
+    },
+    {
+      id: "5",
+      name: "Hardcover",
+      list_name_encoded: "hardcover-advice",
+    },
+    {
+      id: "6",
+      name: "Miscellaneous",
+      list_name_encoded: "advice-how-to-and-miscellaneous",
     },
   ];
 
