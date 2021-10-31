@@ -7,9 +7,12 @@ import Description from "../components/detailsComp/Description";
 import { ScrollView } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 
-export default function BookDetails(props) {
+export default function BookDetails() {
   const book = useSelector((state) => state.reducer.bookItemDetail);
-  const [bookDetails, setbookDetails] = useState(book);
+  const [bookDetails, setbookDetails] = useState([]);
+  useEffect(() => {
+    setbookDetails(book);
+  }, [book]);
   return (
     <ScrollView>
       <View style={styles.container}>

@@ -1,24 +1,38 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { Colors } from "../../constant/Colors";
+import { AntDesign } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
 
-export default function FavouritItem({ item }) {
+export default function FavouritItem({ item, navigation }) {
+  const dispatch = useDispatch();
+
+  const handleBackToDetailsScreen = () => {
+    dispatch({ type: "BOOK_DETAILS", bookDetails: item });
+    setTimeout(() => {
+      navigation.navigate("navHome", { screen: "details" });
+    }, 100);
+  };
+
   return (
     <View style={styles.containerFavItem}>
       <Image style={styles.img} source={{ uri: item.book_image }} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>{item.title}</Text>
-
         <Text style={styles.author}>{item.author}</Text>
-        <Text style={styles.author}>{">>"}</Text>
       </View>
+      <Pressable onPress={handleBackToDetailsScreen}>
+        <View style={styles.iconContainer}>
+          <AntDesign name="arrowright" size={20} color={Colors.W} />
+        </View>
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   containerFavItem: {
-    width: "100%",
+    width: "90%",
     padding: 20,
     backgroundColor: Colors.grayWhite,
     elevation: 2,
@@ -27,23 +41,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2,
     borderRadius: 5,
-    marginVertical: 20,
+    marginVertical: 10,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
   },
 
   img: {
-    width: 70,
+    width: "25%",
     height: 100,
     borderRadius: 5,
     resizeMode: "cover",
     marginRight: 10,
   },
   textContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: "60%",
+    width: "65%",
   },
   title: {
     fontSize: 18,
@@ -56,5 +68,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: Colors.grayDark,
     textTransform: "capitalize",
+  },
+  iconContainer: {
+    backgroundColor: Colors.orange,
+    padding: 5,
+    borderRadius: 5,
   },
 });

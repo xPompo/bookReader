@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -11,10 +11,12 @@ import Profile from "../screens/Profile";
 import BookMark from "../screens/BookMark";
 import "react-native-gesture-handler";
 import { Colors } from "./Colors";
+import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 export default function Navigation() {
+  // const navigation = useNavigation();
   const navHome = () => {
     return (
       <Stack.Navigator
@@ -23,17 +25,19 @@ export default function Navigation() {
           tabBarActiveTintColor: Colors.orange,
           tabBarInactiveTintColor: Colors.grayDark,
           headerShown: false,
+          presentation: "modal",
         }}
       >
-        <Stack.Screen name="home" component={Home} />
-        <Tab.Screen name="details" component={BookDetails} />
+        <Stack.Screen name="home">
+          {(props) => <Home {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="details" component={BookDetails} />
       </Stack.Navigator>
     );
   };
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="navHome"
         screenOptions={{
           tabBarStyle: styles.tabBarStyle,
           tabBarActiveTintColor: Colors.orange,
@@ -45,26 +49,31 @@ export default function Navigation() {
         <Tab.Screen
           name="navHome"
           component={navHome}
-          options={{
+          options={({ navigation }) => ({
             tabBarIcon: ({ color }) => {
               return (
-                <View style={styles.tabIcon}>
-                  {color === Colors.orange && (
-                    <Entypo name="home" size={22} color={color} />
-                  )}
-                  {color === Colors.grayDark && (
-                    <AntDesign name="home" size={22} color={color} />
-                  )}
-                  <Text style={{ fontSize: 10, color: color }}>Home</Text>
-                </View>
+                <Pressable
+                  onPress={() =>
+                    navigation.navigate("navHome", { screen: "home" })
+                  }
+                >
+                  <View style={styles.tabIcon}>
+                    {color === Colors.orange && (
+                      <Entypo name="home" size={22} color={color} />
+                    )}
+                    {color === Colors.grayDark && (
+                      <AntDesign name="home" size={22} color={color} />
+                    )}
+                    <Text style={{ fontSize: 10, color: color }}>Home</Text>
+                  </View>
+                </Pressable>
               );
             },
-          }}
+          })}
         />
 
         <Tab.Screen
           name="search"
-          component={SearchBook}
           options={{
             tabBarLabel: "Search",
             tabBarIcon: ({ color }) => {
@@ -81,7 +90,9 @@ export default function Navigation() {
               );
             },
           }}
-        />
+        >
+          {(props) => <SearchBook {...props} />}
+        </Tab.Screen>
         <Tab.Screen
           name="profile"
           component={Profile}

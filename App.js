@@ -1,6 +1,4 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
 import Navigation from "./constant/Navigation";
 import { reducer } from "./store/reducer";
 import { Provider } from "react-redux";
