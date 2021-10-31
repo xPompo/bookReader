@@ -6,27 +6,23 @@ export default function BooksCategories({ setBookCategory }) {
   const DUMMY_TEXT = [
     {
       id: "1",
-      name: "fiction",
+      name: "Fiction",
       list_name_encoded: "hardcover-fiction",
-      icon: "*",
     },
     {
       id: "2",
-      name: "non-fiction",
+      name: "Novels",
       list_name_encoded: "paperback-nonfiction",
-      icon: "*",
     },
     {
       id: "3",
-      name: "fiction",
+      name: "Drama",
       list_name_encoded: "combined-print-and-e-book-fiction",
-      icon: "*",
     },
     {
       id: "4",
-      name: "non-fiction",
+      name: "Social",
       list_name_encoded: "paperback-nonfiction",
-      icon: "*",
     },
   ];
 
@@ -47,7 +43,6 @@ export default function BooksCategories({ setBookCategory }) {
           }}
         >
           <View style={styles.textContainer}>
-            <Text style={styles.icon}>{item.icon}</Text>
             <Text
               style={{
                 ...styles.name,
@@ -95,11 +90,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 10,
     shadowColor: Colors.grayDark,
-  },
-  icon: {
-    marginRight: 10,
-    fontSize: 20,
-    color: Colors.gray,
   },
   name: {
     fontSize: 18,
