@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import { Colors } from "../../constant/Colors";
 
-export default function BooksCategories({ setBookCategory }) {
+export default function BooksCategories({ setBookCategory, bookCategoryList }) {
   const DUMMY_TEXT = [
     {
       id: "1",
@@ -39,7 +39,7 @@ export default function BooksCategories({ setBookCategory }) {
   const [playingindex, setplayindex] = useState(0);
   const activeColorHandler = (idx) => {
     setplayindex(idx);
-    setBookCategory(DUMMY_TEXT[idx].list_name_encoded);
+    setBookCategory(bookCategoryList[idx].list_name_encoded);
   };
 
   const render = ({ item, index }) => {
@@ -59,7 +59,7 @@ export default function BooksCategories({ setBookCategory }) {
                 color: playingindex === index ? Colors.W : Colors.grayDark,
               }}
             >
-              {item.name}
+              {item.list_name_encoded.slice(15, item.list_name_encoded.length)}
             </Text>
           </View>
         </View>
@@ -72,7 +72,7 @@ export default function BooksCategories({ setBookCategory }) {
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        data={DUMMY_TEXT}
+        data={bookCategoryList}
         renderItem={render}
         keyExtractor={(item) => item.id}
       />
