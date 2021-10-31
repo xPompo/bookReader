@@ -9,24 +9,8 @@ import { StatusBar } from "expo-status-bar";
 export default function SearchBook(props) {
   const API_LEY = "xSmRRimyfL7qUfuZXl0pro3MM3macGUW";
   const [text, setText] = useState("");
-  // const [searchData, setSearchData] = useState([]);
   const [topBooksSearch, setTopBooksSearch] = useState([]);
-  // const searchDataApi = () => {
-  //   fetch(
-  //     `https://api.nytimes.com/svc/books/v3/lists/names.json?api-key=${API_LEY}`
-  //   )
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setSearchData(data.results);
-  //       console.log(data.results);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       console.log("hola eroor no code api");
-  //     });
-  // };
+
   const topBooksSearchApi = () => {
     fetch(
       `https://api.nytimes.com/svc/books/v3/lists/current/paperback-nonfiction.json?api-key=${API_LEY}`
@@ -46,7 +30,6 @@ export default function SearchBook(props) {
 
   useEffect(() => {
     topBooksSearchApi();
-    // searchDataApi();
   }, []);
 
   return (
@@ -55,6 +38,7 @@ export default function SearchBook(props) {
       <SearchList
         navigation={props.navigation}
         text={text}
+        setText={setText}
         topBooksSearch={topBooksSearch}
       />
       <TopBooksSearch topBooksSearch={topBooksSearch} />

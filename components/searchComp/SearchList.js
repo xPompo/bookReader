@@ -3,12 +3,17 @@ import { View, Text, FlatList, StyleSheet, Pressable } from "react-native";
 import { useDispatch } from "react-redux";
 import { Colors } from "../../constant/Colors";
 
-export default function SearchList({ navigation, topBooksSearch, text }) {
+export default function SearchList({
+  navigation,
+  setText,
+  topBooksSearch,
+  text,
+}) {
   const dispatch = useDispatch();
   const render = ({ item, index }) => {
     const handleClickList = () => {
-      console.log(item.title);
       dispatch({ type: "BOOK_DETAILS", bookDetails: item });
+      setText("");
       navigation.navigate("navHome", { screen: "details" });
     };
 
