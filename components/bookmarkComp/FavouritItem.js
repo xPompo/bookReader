@@ -14,19 +14,30 @@ export default function FavouritItem({ item, navigation }) {
     }, 100);
   };
 
+  const handleDeleteBookmark = () => {
+    dispatch({ type: "REMOVE_FROM_BOOKMARK", payload: { favouritBook: item } });
+  };
+
   return (
-    <View style={styles.containerFavItem}>
-      <Image style={styles.img} source={{ uri: item.book_image }} />
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.author}>{item.author}</Text>
+    <>
+      <View style={styles.closeiconContainer}>
+        <Pressable onPress={handleDeleteBookmark}>
+          <AntDesign name="close" size={20} color={Colors.W} />
+        </Pressable>
       </View>
-      <Pressable onPress={handleBackToDetailsScreen}>
-        <View style={styles.iconContainer}>
-          <AntDesign name="arrowright" size={20} color={Colors.W} />
+      <View style={styles.containerFavItem}>
+        <Image style={styles.img} source={{ uri: item.book_image }} />
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.author}>{item.author}</Text>
         </View>
-      </Pressable>
-    </View>
+        <Pressable onPress={handleBackToDetailsScreen}>
+          <View style={styles.iconContainer}>
+            <AntDesign name="arrowright" size={20} color={Colors.W} />
+          </View>
+        </Pressable>
+      </View>
+    </>
   );
 }
 
@@ -40,8 +51,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    borderRadius: 5,
-    marginVertical: 10,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    marginBottom: 10,
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "center",
@@ -70,8 +82,16 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   iconContainer: {
-    backgroundColor: Colors.orange,
+    backgroundColor: Colors.BG,
     padding: 5,
     borderRadius: 5,
+  },
+  closeiconContainer: {
+    backgroundColor: Colors.orange,
+    padding: 5,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    marginTop: 10,
+    width: "90%",
   },
 });

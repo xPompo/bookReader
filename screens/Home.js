@@ -48,7 +48,7 @@ export default function Home({ navigation }) {
       console.log("Nooooooooooooooooooooo");
     }
   };
-  console.log(bookCategoryList);
+
   return (
     <ScrollView>
       <View style={styles.container}>

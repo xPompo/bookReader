@@ -11,16 +11,14 @@ import Profile from "../screens/Profile";
 import BookMark from "../screens/BookMark";
 import "react-native-gesture-handler";
 import { Colors } from "./Colors";
-import { useNavigation } from "@react-navigation/native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 export default function Navigation() {
-  // const navigation = useNavigation();
   const navHome = () => {
     return (
       <Stack.Navigator
-        initialRouteName="home"
+        // initialRouteName="home"
         screenOptions={{
           tabBarActiveTintColor: Colors.orange,
           tabBarInactiveTintColor: Colors.grayDark,

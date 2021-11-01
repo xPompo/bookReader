@@ -3,45 +3,13 @@ import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import { Colors } from "../../constant/Colors";
 
 export default function BooksCategories({ setBookCategory, bookCategoryList }) {
-  const DUMMY_TEXT = [
-    {
-      id: "1",
-      name: "Fiction",
-      list_name_encoded: "hardcover-fiction",
-    },
-    {
-      id: "2",
-      name: "Novels",
-      list_name_encoded: "paperback-nonfiction",
-    },
-    {
-      id: "3",
-      name: "Drama",
-      list_name_encoded: "hardcover-nonfiction",
-    },
-    {
-      id: "4",
-      name: "Mass Market",
-      list_name_encoded: "mass-market-paperback",
-    },
-    {
-      id: "5",
-      name: "Hardcover",
-      list_name_encoded: "hardcover-advice",
-    },
-    {
-      id: "6",
-      name: "Miscellaneous",
-      list_name_encoded: "advice-how-to-and-miscellaneous",
-    },
-  ];
-
   const [playingindex, setplayindex] = useState(0);
   const activeColorHandler = (idx) => {
     setplayindex(idx);
     setBookCategory(bookCategoryList[idx].list_name_encoded);
-  };
 
+    console.log(bookCategoryList[idx].display_name.split(" ")[0]);
+  };
   const render = ({ item, index }) => {
     return (
       <Pressable onPress={() => activeColorHandler(index)}>
@@ -59,7 +27,9 @@ export default function BooksCategories({ setBookCategory, bookCategoryList }) {
                 color: playingindex === index ? Colors.W : Colors.grayDark,
               }}
             >
-              {item.list_name_encoded.slice(15, item.list_name_encoded.length)}
+              {item.display_name.split(" ")[0] +
+                " " +
+                item.display_name.split(" ")[1]}
             </Text>
           </View>
         </View>
@@ -74,7 +44,7 @@ export default function BooksCategories({ setBookCategory, bookCategoryList }) {
         showsHorizontalScrollIndicator={false}
         data={bookCategoryList}
         renderItem={render}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => index.toString()}
       />
     </View>
   );
@@ -91,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   CategoryItemContainer: {
-    width: 125,
+    width: 140,
     height: 40,
     justifyContent: "center",
     alignItems: "center",
@@ -102,7 +72,7 @@ const styles = StyleSheet.create({
     shadowColor: Colors.grayDark,
   },
   name: {
-    fontSize: 18,
+    fontSize: 14,
     color: Colors.grayDark,
     fontWeight: "bold",
     letterSpacing: 0.5,

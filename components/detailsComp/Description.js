@@ -8,6 +8,10 @@ export default function Description({ bookDetails, navigation }) {
   const [bookmarkActive, setBookmarkActive] = useState(false);
   const dispatch = useDispatch();
 
+  const readingAlert = () => {
+    console.log("reading The novel");
+  };
+
   const bookmarkHandler = () => {
     setBookmarkActive((prev) => !prev);
     if (!bookmarkActive) {
@@ -46,7 +50,7 @@ export default function Description({ bookDetails, navigation }) {
             />
           </View>
         </Pressable>
-        <Pressable>
+        <Pressable onPress={readingAlert}>
           <View style={styles.btnReadContainer}>
             <Text style={styles.btnRead}>Start Reading</Text>
           </View>

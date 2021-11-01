@@ -20,7 +20,6 @@ export default function SearchBook(props) {
       })
       .then((data) => {
         setTopBooksSearch(data.results.books);
-        console.log(data.results.books);
       })
       .catch((error) => {
         console.log(error);

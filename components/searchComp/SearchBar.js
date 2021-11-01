@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import {
-  View,
   TextInput,
   StyleSheet,
   Dimensions,
@@ -10,7 +9,6 @@ import { Colors } from "../../constant/Colors";
 const { width } = Dimensions.get("window");
 
 export default function SearchBar({ text, setText }) {
-  console.log(text);
   return (
     <KeyboardAvoidingView
       behavior="padding"
