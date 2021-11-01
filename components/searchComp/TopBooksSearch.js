@@ -1,26 +1,43 @@
 import React from "react";
-import { View, Text, FlatList, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  StyleSheet,
+  Pressable,
+} from "react-native";
 import { Colors } from "../../constant/Colors";
+import { useDispatch } from "react-redux";
 
-export default function TopBooksSearch({ topBooksSearch }) {
+export default function TopBooksSearch({ topBooksSearch, navigation }) {
+  const dispatch = useDispatch();
   const render = ({ item, index }) => {
+    const handleTopBooks = () => {
+      dispatch({ type: "BOOK_DETAILS", bookDetails: item });
+
+      navigation.navigate("navHome", { screen: "details" });
+    };
+
     return (
-      <View style={styles.bookItemContainer}>
-        <Image source={{ uri: item.book_image }} style={styles.img} />
-        <View style={styles.textConatiner}>
-          <Text style={styles.title}>
-            {item.title.length > 10
-              ? item.title.slice(0, 10) + "..."
-              : item.title}
-          </Text>
-          <Text style={styles.author}>
-            {" "}
-            {item.author.length > 10
-              ? item.author.slice(0, 10) + "..."
-              : item.author}
-          </Text>
+      <Pressable onPress={handleTopBooks}>
+        <View style={styles.bookItemContainer}>
+          <Image source={{ uri: item.book_image }} style={styles.img} />
+          <View style={styles.textConatiner}>
+            <Text style={styles.title}>
+              {item.title.length > 10
+                ? item.title.slice(0, 10) + "..."
+                : item.title}
+            </Text>
+            <Text style={styles.author}>
+              {" "}
+              {item.author.length > 10
+                ? item.author.slice(0, 10) + "..."
+                : item.author}
+            </Text>
+          </View>
         </View>
-      </View>
+      </Pressable>
     );
   };
 

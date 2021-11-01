@@ -40,7 +40,10 @@ export default function SearchBook(props) {
         setText={setText}
         topBooksSearch={topBooksSearch}
       />
-      <TopBooksSearch topBooksSearch={topBooksSearch} />
+      <TopBooksSearch
+        topBooksSearch={topBooksSearch}
+        navigation={props.navigation}
+      />
       <TopAuthors topBooksSearch={topBooksSearch} />
       <StatusBar style="auto" />
     </View>
