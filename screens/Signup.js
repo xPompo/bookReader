@@ -65,24 +65,24 @@ export default function Signup() {
               handleChange={handleChange}
               handleBlur={handleBlur}
               label="Name"
-              value={values.name}
               handle="name"
+              value={values.name}
             />
             {touched.name && errors.name && <Text>{errors.name}</Text>}
             <SignupItemField
               handleChange={handleChange}
               handleBlur={handleBlur}
               label="Email"
-              value={values.email}
               handle="email"
+              value={values.email}
             />
             {touched.email && errors.email && <Text>{errors.email}</Text>}
             <SignupItemField
               handleChange={handleChange}
               handleBlur={handleBlur}
               label="password"
-              value={values.password}
               handle="password"
+              value={values.password}
             />
             {touched.password && errors.password && (
               <Text>{errors.password}</Text>
@@ -91,13 +91,22 @@ export default function Signup() {
               handleChange={handleChange}
               handleBlur={handleBlur}
               label="confirm password"
-              value={values.confirmPassword}
               handle="confirmPassword"
+              value={values.confirmPassword}
             />
             {touched.confirmPassword && errors.confirmPassword && (
               <Text>{errors.confirmPassword}</Text>
             )}
-            <Button title="Sign Up" onPress={handleSubmit} />
+            <Button
+              title="Sign up"
+              onPress={handleSubmit}
+              disabled={
+                !values.name ||
+                !values.email ||
+                !values.password ||
+                !values.confirmPassword
+              }
+            />
           </View>
         )}
       </Formik>
