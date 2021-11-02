@@ -16,7 +16,11 @@ export default function ArrowButton({ navigation }) {
 }
 const styles = StyleSheet.create({
   container: {
-    width: "90%",
+    position: "absolute",
+    top: 40,
+    left: 20,
+    flex: 1,
+    width: "100%",
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },

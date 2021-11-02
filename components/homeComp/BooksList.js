@@ -17,9 +17,7 @@ export default function BooksList({ navigation, bookList }) {
   const dispatch = useDispatch();
   const getBookDetails = (bookDetails) => {
     dispatch({ type: "BOOK_DETAILS", bookDetails });
-    navigation.navigate("navHome", {
-      screen: "details",
-    });
+    navigation.navigate("details");
   };
 
   const render = ({ item, index }) => {

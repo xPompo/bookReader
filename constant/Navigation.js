@@ -3,38 +3,21 @@ import { Text, View, StyleSheet, Pressable } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { AntDesign, Ionicons, Entypo, FontAwesome } from "@expo/vector-icons";
 import SearchBook from "../screens/SearchBook";
 import BookDetails from "../screens/BookDetails";
-import { AntDesign, Ionicons, Entypo, FontAwesome } from "@expo/vector-icons";
 import Home from "../screens/Home";
 import Profile from "../screens/Profile";
 import BookMark from "../screens/BookMark";
-import "react-native-gesture-handler";
+import Signup from "../screens/Signup";
 import { Colors } from "./Colors";
+import "react-native-gesture-handler";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 export default function Navigation() {
   const navHome = () => {
     return (
-      <Stack.Navigator
-        // initialRouteName="home"
-        screenOptions={{
-          tabBarActiveTintColor: Colors.orange,
-          tabBarInactiveTintColor: Colors.grayDark,
-          headerShown: false,
-          presentation: "modal",
-        }}
-      >
-        <Stack.Screen name="home">
-          {(props) => <Home {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="details" component={BookDetails} />
-      </Stack.Navigator>
-    );
-  };
-  return (
-    <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
           tabBarStyle: styles.tabBarStyle,
@@ -44,9 +27,9 @@ export default function Navigation() {
           tabBarShowLabel: false,
         }}
       >
+        {/* //--Home--// */}
         <Tab.Screen
-          name="navHome"
-          component={navHome}
+          name="home"
           options={({ navigation }) => ({
             tabBarIcon: ({ color }) => {
               return (
@@ -68,8 +51,10 @@ export default function Navigation() {
               );
             },
           })}
-        />
-
+        >
+          {(props) => <Home {...props} />}
+        </Tab.Screen>
+        {/* //--Search--// */}
         <Tab.Screen
           name="search"
           options={{
@@ -91,6 +76,7 @@ export default function Navigation() {
         >
           {(props) => <SearchBook {...props} />}
         </Tab.Screen>
+        {/* //--Profile--// */}
         <Tab.Screen
           name="profile"
           component={Profile}
@@ -111,6 +97,7 @@ export default function Navigation() {
             },
           }}
         />
+        {/* //--Bookmark--// */}
         <Tab.Screen
           name="bookmark"
           component={BookMark}
@@ -132,9 +119,33 @@ export default function Navigation() {
           }}
         />
       </Tab.Navigator>
+    );
+  };
+
+  ///////////////////////////////////MainNavigation////////////////////////////////////
+  return (
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="signup"
+        screenOptions={{
+          tabBarActiveTintColor: Colors.orange,
+          tabBarInactiveTintColor: Colors.grayDark,
+          headerShown: false,
+          presentation: "modal",
+        }}
+      >
+        {/* //--MainTabHome--// */}
+        <Stack.Screen name="navHome" component={navHome} />
+        {/* //--Details--// */}
+        <Stack.Screen name="details" component={BookDetails} />
+        {/* //--Signup--// */}
+        <Stack.Screen name="signup" component={Signup} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+///////////////////// styles//////////////////////////////
 
 const styles = StyleSheet.create({
   tabIcon: { justifyContent: "center", alignItems: "center" },
