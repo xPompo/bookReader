@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -13,11 +13,24 @@ import SignupItemField from "../components/signupComp/SignupItemField";
 import SignImage from "../components/signupComp/SignImage";
 import { Platform } from "expo-modules-core";
 import { Colors } from "../constant/Colors";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 export default function Signup(props) {
   const auth = getAuth();
-  //   const user = auth.currentUser;
+  useEffect(() => {
+    onAuthStateChanged(auth, (userInfo) => {
+      if (userInfo) {
+        console.log(userInfo.displayName);
+        props.navigation.navigate("navHome", { screen: "home" });
+      } else {
+        console.log("No user entered");
+      }
+    });
+  }, []);
   const validation = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
     password: Yup.string()

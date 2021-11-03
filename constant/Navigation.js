@@ -127,7 +127,7 @@ export default function Navigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="signup"
+        initialRouteName="login"
         screenOptions={{
           tabBarActiveTintColor: Colors.orange,
           tabBarInactiveTintColor: Colors.grayDark,

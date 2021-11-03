@@ -11,7 +11,7 @@ import ArrowButton from "../components/profileComp/ArrowButton";
 import ProfileInfo from "../components/profileComp/ProfileInfo";
 import ProfileButtons from "../components/profileComp/ProfileButtons";
 import { ScrollView } from "react-native-gesture-handler";
-import { getAuth, signOut } from "@firebase/auth";
+import { getAuth, signOut, deleteUser } from "@firebase/auth";
 
 export default function Profile(props) {
   const google =
@@ -34,6 +34,16 @@ export default function Profile(props) {
       console.log("an error happen.");
     });
   };
+  const deleteAccount = () => {
+    deleteUser(auth.currentUser)
+      .then(() => {
+        console.log("user deleted");
+        props.navigation.navigate("login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <ScrollView>
@@ -46,8 +56,8 @@ export default function Profile(props) {
           icon="home"
         />
         <ProfileButtons
-          onClick={() => console.log("hola")}
-          text="Reading Books"
+          onClick={deleteAccount}
+          text="Delete Your Account"
           icon="home"
         />
         <ProfileButtons
