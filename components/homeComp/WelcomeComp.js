@@ -1,11 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Colors } from "../../constant/Colors";
-
+import { getAuth } from "firebase/auth";
 export default function WelcomeComp() {
+  const auth = getAuth();
+  const user = auth.currentUser;
+
   return (
     <View style={styles.container}>
-      <Text style={styles.tittle}>Hello,TEXT</Text>
+      <Text style={styles.tittle}>
+        Hello,{user !== null ? user.displayName : "No user Name"}
+      </Text>
       <Text style={styles.subTittle}>Which books suits your current mood?</Text>
 
       <Image
@@ -22,7 +27,6 @@ export default function WelcomeComp() {
 const styles = StyleSheet.create({
   container: {
     position: "relative",
-    // height: 250,
     width: "95%",
     paddingTop: 40,
     justifyContent: "flex-start",

@@ -2,22 +2,27 @@ import React from "react";
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   StatusBar as NativeStatusBar,
+  TouchableOpacity,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import SignupItemField from "../components/signupComp/SignupItemField";
 import { Platform } from "expo-modules-core";
+import { Colors } from "../constant/Colors";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
-export default function Signup() {
+export default function Signup(props) {
+  const dispatch = useDispatch();
+  const auth = getAuth();
+  const user = auth.currentUser;
   const validation = Yup.object({
     name: Yup.string().required("Required"),
     email: Yup.string().email("Invalid email address").required("Required"),
@@ -30,11 +35,15 @@ export default function Signup() {
   });
 
   const onSignUphandler = (values) => {
-    const { name, email, password } = values;
-    const auth = getAuth();
-    const user = auth.currentUser;
-    updateProfile(user, { displayName: name });
-    createUserWithEmailAndPassword(auth, email, password);
+    const { email, password, name } = values;
+    createUserWithEmailAndPassword(auth, email, password).then((userInfo) => {
+      console.log("User created");
+      updateProfile(userInfo.user, { displayName: name }).then(() => {
+        console.log("Display Name is :  " + userInfo.user.displayName);
+      });
+    });
+    dispatch({ type: "USER_NAME", userName: name });
+    props.navigation.navigate("navHome", { screen: "home" });
   };
 
   return (
@@ -97,8 +106,7 @@ export default function Signup() {
             {touched.confirmPassword && errors.confirmPassword && (
               <Text>{errors.confirmPassword}</Text>
             )}
-            <Button
-              title="Sign up"
+            <TouchableOpacity
               onPress={handleSubmit}
               disabled={
                 !values.name ||
@@ -106,7 +114,12 @@ export default function Signup() {
                 !values.password ||
                 !values.confirmPassword
               }
-            />
+              activeOpacity={0.5}
+            >
+              <View style={styles.signUpButtonContainer}>
+                <Text style={styles.signUpButton}>Sign up</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         )}
       </Formik>
@@ -122,5 +135,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     marginTop: Platform.OS === "android" ? NativeStatusBar.currentHeight : 0,
+  },
+  signUpButtonContainer: {
+    width: 280,
+    height: 45,
+    borderRadius: 50,
+    marginTop: 50,
+    backgroundColor: Colors.orange,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signUpButton: {
+    color: "white",
+    fontWeight: "bold",
   },
 });

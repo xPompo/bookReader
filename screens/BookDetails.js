@@ -4,7 +4,6 @@ import { StatusBar } from "expo-status-bar";
 import Banner from "../components/detailsComp/Banner";
 import RatingBar from "../components/detailsComp/RatingBar";
 import Description from "../components/detailsComp/Description";
-import { ScrollView } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 import ArrowButton from "../components/profileComp/ArrowButton";
 
