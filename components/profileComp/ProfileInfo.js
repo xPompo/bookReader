@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Colors } from "../../constant/Colors";
 
-export default function ProfileInfo() {
+export default function ProfileInfo({ CurrentUserName }) {
   return (
     <View style={styles.profileInfoContainer}>
       <Image
@@ -11,7 +11,7 @@ export default function ProfileInfo() {
         }}
         style={styles.img}
       />
-      <Text style={styles.name}>Welcome, Name</Text>
+      <Text style={styles.name}>{"Welcome," + CurrentUserName}</Text>
       <Text style={styles.readerRange}>Mid Reading</Text>
     </View>
   );

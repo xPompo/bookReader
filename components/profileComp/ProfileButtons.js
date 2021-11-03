@@ -3,10 +3,10 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Colors } from "../../constant/Colors";
 
-export default function ProfileButtons({ icon, text }) {
+export default function ProfileButtons({ icon, text, onClick }) {
   return (
     <View style={styles.mainContainer}>
-      <Pressable onPress={() => console.log("hola")}>
+      <Pressable onPress={onClick}>
         <View style={styles.container}>
           <View style={styles.iconContainer}>
             <AntDesign name={icon} size={16} color={Colors.W} />
