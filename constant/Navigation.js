@@ -12,6 +12,7 @@ import BookMark from "../screens/BookMark";
 import Signup from "../screens/Signup";
 import { Colors } from "./Colors";
 import "react-native-gesture-handler";
+import Login from "../screens/Login";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -140,6 +141,8 @@ export default function Navigation() {
         <Stack.Screen name="details" component={BookDetails} />
         {/* //--Signup--// */}
         <Stack.Screen name="signup" component={Signup} />
+        {/* //--Login--// */}
+        <Stack.Screen name="login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );

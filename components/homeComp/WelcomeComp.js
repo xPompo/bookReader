@@ -9,7 +9,7 @@ export default function WelcomeComp() {
   return (
     <View style={styles.container}>
       <Text style={styles.tittle}>
-        Hello,{user !== null ? user.displayName : "No user Name"}
+        {"Hello, " + (user !== null ? user.displayName : "No user Name")}
       </Text>
       <Text style={styles.subTittle}>Which books suits your current mood?</Text>
 
