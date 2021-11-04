@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -11,11 +11,47 @@ import { StatusBar } from "expo-status-bar";
 import FavouritItem from "../components/bookmarkComp/FavouritItem";
 import { useSelector } from "react-redux";
 import { Colors } from "../constant/Colors";
+import { getDatabase, ref, set, child, get } from "firebase/database";
+import { getAuth } from "firebase/auth";
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Setting a timer"]);
 
 export default function BookMark({ navigation }) {
+  const [s, sets] = useState([]);
   const arrayFavouritBooks = useSelector(
     (state) => state.reducer.favouritBooks
   );
+  useEffect(() => {
+    const auth = getAuth();
+    const dbRef = ref(getDatabase());
+    const cUserID = auth.currentUser.uid;
+    get(child(dbRef, "bookmark/" + cUserID))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log("data is in firebase i will get it now.");
+          sets(snapshot.val().favouritBooks);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [arrayFavouritBooks]);
+  useEffect(() => {
+    const db = getDatabase();
+    const auth = getAuth();
+    const cUserID = auth.currentUser.uid;
+    set(ref(db, "bookmark/" + cUserID), {
+      favouritBooks: arrayFavouritBooks,
+    })
+      .then(() => {
+        console.log("bookmark added");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [arrayFavouritBooks]);
 
   const render = ({ item, index }) => {
     return (
@@ -27,14 +63,14 @@ export default function BookMark({ navigation }) {
 
   return (
     <>
-      {arrayFavouritBooks[0] ? (
+      {s[0] ? (
         <View style={styles.container}>
           <View style={styles.headerContainerMain}>
             <Text style={styles.headerText}>Saved Books</Text>
           </View>
           <FlatList
             showsVerticalScrollIndicator={false}
-            data={arrayFavouritBooks}
+            data={s}
             renderItem={render}
             keyExtractor={(item, index) => index.toString()}
           />

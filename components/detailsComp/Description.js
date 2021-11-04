@@ -4,14 +4,12 @@ import { Colors } from "../../constant/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 
-export default function Description({ bookDetails, navigation }) {
+export default function Description({ bookDetails }) {
   const [bookmarkActive, setBookmarkActive] = useState(false);
   const dispatch = useDispatch();
-
   const readingAlert = () => {
     console.log("reading The novel");
   };
-
   const bookmarkHandler = () => {
     setBookmarkActive((prev) => !prev);
     if (!bookmarkActive) {

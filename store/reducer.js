@@ -1,6 +1,7 @@
 const initialState = {
   bookItemDetail: {},
   favouritBooks: [],
+  bookmarkActive: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -17,11 +18,13 @@ export const reducer = (state = initialState, action) => {
       if (findSimillar) {
         return {
           ...state,
+          bookmarkActive: true,
         };
       } else {
         return {
           ...state,
           favouritBooks: [...state.favouritBooks, action.payload.favouritBook],
+          bookmarkActive: true,
         };
       }
 
@@ -32,6 +35,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         favouritBooks: newFavouritBooks,
+        bookmarkActive: false,
       };
     default:
       return state;

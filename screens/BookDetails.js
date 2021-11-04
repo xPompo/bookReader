@@ -10,17 +10,22 @@ import ArrowButton from "../components/profileComp/ArrowButton";
 export default function BookDetails(props) {
   const book = useSelector((state) => state.reducer.bookItemDetail);
   const [bookDetails, setbookDetails] = useState([]);
+
   useEffect(() => {
     setbookDetails(book);
   }, [book]);
+
   return (
-    <View style={styles.container}>
-      <ArrowButton navigation={props.navigation} />
-      <Banner bookDetails={bookDetails} />
-      <RatingBar bookDetails={bookDetails} />
-      <Description bookDetails={bookDetails} />
+    <>
+      <View style={styles.container}>
+        <ArrowButton navigation={props.navigation} />
+        <Banner bookDetails={bookDetails} />
+        <RatingBar bookDetails={bookDetails} />
+        <Description bookDetails={bookDetails} />
+      </View>
+
       <StatusBar style="auto" />
-    </View>
+    </>
   );
 }
 const styles = StyleSheet.create({
